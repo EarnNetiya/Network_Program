@@ -2,7 +2,7 @@ import asyncio
 
 async def handle(reader, writer):
     addr = writer.get_extra_info('peername')
-    message = f"{add!r} is connected !!!"
+    message = f"{addr!r} is connected !!!"
     print(message)
     while True:
         data = await reader.read(100)
@@ -10,7 +10,7 @@ async def handle(reader, writer):
         writer.write(data)
         await writer.drain()
         if message == 'exit':
-            message = f"{add!r} wants to close the connection."
+            message = f"{addr!r} wants to close the connection."
             print(message)
             break
     writer.close()

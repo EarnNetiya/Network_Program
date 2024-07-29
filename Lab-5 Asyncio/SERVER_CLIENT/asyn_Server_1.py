@@ -10,7 +10,7 @@ def forward(writer, addr , message):
 async def handle(reader, writer):
     writers.append(writer)
     addr = writer.get_extra_info('peername')
-    message = f"{add!r} is connected !!!!"
+    message = f"{addr!r} is connected !!!!"
     print(message)
     forward(writer,addr,message)
     while True:
@@ -19,7 +19,7 @@ async def handle(reader, writer):
         forward(writer,addr,message)
         await writer.drain()
         if message == 'exit':
-            message = f'{add!r} wants to close the connection'
+            message = f'{addr!r} wants to close the connection'
             print(message)
             forward(writer,"Server",message)
             break

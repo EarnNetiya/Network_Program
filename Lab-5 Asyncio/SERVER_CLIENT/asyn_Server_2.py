@@ -1,6 +1,6 @@
 import asyncio
 from aiohttp import web
-import socketio
+import socketio 
 from json import dumps
 
 sio = socketio.AsyncServer(async_mode='aiohttp')
@@ -16,7 +16,7 @@ async def join_chat(sid,message):
 async def exit_chat(sid,message):
     sio.leave_room(sid, message['room'])
 
-@sio.evemt
+@sio.event
 async def send_chat_room(sid, message):
     await sio.emit('get_message',{'message':message['message'],'from':message['name']},room=message['room'])
 
